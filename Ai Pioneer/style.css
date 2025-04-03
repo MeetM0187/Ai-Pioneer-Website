@@ -1,0 +1,664 @@
+:root {
+    --primary-color: #6a11cb; /* Example Purple */
+    --secondary-color: #2575fc; /* Example Blue */
+    --gradient-start: var(--primary-color);
+    --gradient-end: var(--secondary-color);
+    --background-color: #ffffff;
+    --surface-color: #f8f9fa; /* Light grey for cards/sections */
+    --text-color: #343a40;
+    --heading-color: #212529;
+    --muted-text-color: #6c757d;
+    --border-color: #dee2e6;
+    --white: #fff;
+    --black: #000;
+
+    --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* System font stack */
+    --section-padding: 60px 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--heading-color);
+    margin-bottom: 0.8em;
+    line-height: 1.3;
+    font-weight: 600;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; } /* Responsive font size */
+h2 { font-size: clamp(1.8rem, 4vw, 2rem); }
+h3 { font-size: 1.4rem; }
+
+p {
+    margin-bottom: 1em;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-padding {
+    padding: var(--section-padding);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.highlight-bg {
+    background-color: var(--surface-color);
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* --- Buttons --- */
+.cta-button {
+    display: inline-block;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    text-align: center;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.cta-button.primary {
+    background-image: linear-gradient(to right, var(--gradient-start) 0%, var(--secondary-color) 100%);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.cta-button.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(106, 17, 203, 0.25); /* Use primary color shadow */
+    color: var(--white); /* Keep text color */
+}
+
+.cta-button.secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+.cta-button.secondary:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.cta-button.large {
+    padding: 15px 35px;
+    font-size: 1.1rem;
+}
+
+/* --- Header / Navigation --- */
+.sticky-nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
+    backdrop-filter: blur(10px); /* Blur effect */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, top 0.3s ease; /* Added top transition */
+}
+
+.sticky-nav nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--heading-color);
+}
+.logo:hover { color: var(--heading-color); }
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    font-weight: 500;
+    position: relative;
+    padding: 5px 0;
+}
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+.nav-links a::after { /* Underline hover effect */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-bar {
+    padding: 8px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    min-width: 200px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.search-bar:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+}
+
+.mobile-nav-toggle {
+    display: none; /* Hidden by default */
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--heading-color);
+    z-index: 1100; /* Above nav links */
+}
+
+/* --- Hero Section --- */
+#hero {
+    position: relative;
+    min-height: calc(100vh - 70px); /* Full viewport height minus nav */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 0;
+    overflow: hidden; /* For background animation */
+    background: #f0f4ff; /* Light background fallback */
+    /* Optional: Subtle gradient */
+    background: linear-gradient(135deg, #eef2ff 0%, #f8faff 100%);
+}
+
+.hero-content {
+    z-index: 2;
+    position: relative;
+    max-width: 800px; /* Control width of text */
+}
+
+.hero-content h1 {
+    margin-bottom: 0.5em;
+}
+
+.sub-headline {
+    font-size: 1.2rem;
+    color: var(--muted-text-color);
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+}
+
+.hero-search {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Align items vertically */
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+.hero-search input {
+    padding: 15px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 400px;
+    flex-grow: 1; /* Allow input to grow */
+}
+.hero-search input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+}
+.hero-search button {
+    flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.hero-ctas {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap; /* Allow wrapping */
+}
+
+/* Basic background animation placeholder */
+.hero-background-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Example: Replace with actual JS-driven canvas or CSS animation */
+    background:
+        radial-gradient(circle at 10% 20%, rgba(106, 17, 203, 0.05), transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(37, 117, 252, 0.05), transparent 50%);
+    z-index: 1;
+    opacity: 0.7;
+}
+
+/* --- Value Proposition Section --- */
+#value-prop .value-prop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.value-item .icon {
+    font-size: 2.5rem; /* Adjust as needed */
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    display: inline-block; /* Center the icon text */
+    /* If using actual icons (e.g., Font Awesome), style the <i> tag instead */
+}
+
+.value-item h3 {
+    margin-bottom: 10px;
+}
+
+.value-item p {
+    color: var(--muted-text-color);
+    font-size: 0.95rem;
+}
+
+/* --- Featured Tools & Prompts Sections --- */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.card {
+    background-color: var(--white);
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column; /* Ensure consistent layout */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.tool-card .tool-logo {
+    width: 50px; /* Adjust size as needed */
+    height: 50px;
+    object-fit: contain; /* Or 'cover' */
+    margin-bottom: 15px;
+    border-radius: 4px; /* Slight rounding for logos */
+    /* For placeholders */
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 0.95rem;
+    color: var(--muted-text-color);
+    flex-grow: 1; /* Make description take available space */
+    margin-bottom: 15px; /* Ensure space before tags/links */
+}
+
+.tags {
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.tags span {
+    background-color: var(--surface-color);
+    color: var(--muted-text-color);
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.card-link {
+    margin-top: auto; /* Push link to bottom if card heights vary */
+    font-weight: 600;
+    display: inline-block; /* Ensure it behaves like a block for margin */
+}
+
+.prompt-card .target-ai {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.prompt-card .prompt-snippet {
+    font-family: monospace; /* Good for code/prompts */
+    background-color: #f1f3f5; /* Light grey background */
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    word-break: break-word; /* Prevent long prompts overflowing */
+}
+
+.prompt-actions {
+    margin-top: auto; /* Push actions to bottom */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.copy-prompt-button {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    color: var(--muted-text-color);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.copy-prompt-button:hover {
+    background-color: #e9ecef; /* Slightly darker grey */
+    color: var(--text-color);
+}
+.copy-prompt-button.copied { /* Style for feedback after copying */
+    background-color: #d1e7dd; /* Bootstrap success green */
+    color: #0f5132;
+    border-color: #badbcc;
+}
+
+.section-cta {
+    text-align: center;
+    margin-top: 40px; /* Added margin top for spacing */
+}
+
+/* --- Final CTA / Newsletter Section --- */
+#cta-final h2 {
+    margin-bottom: 15px;
+}
+
+#cta-final p {
+    color: var(--muted-text-color);
+    margin-bottom: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.newsletter-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+    flex-wrap: wrap; /* Allow wrapping */
+}
+
+.newsletter-form input[type="email"] {
+    flex-grow: 1;
+    padding: 15px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    min-width: 200px; /* Ensure minimum width */
+}
+.newsletter-form input[type="email"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+}
+
+.newsletter-form button {
+    flex-shrink: 0;
+}
+
+/* --- Footer --- */
+footer {
+    background-color: var(--heading-color);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 50px 0 0 0;
+    margin-top: 60px; /* Space above footer */
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.footer-col .logo {
+    color: var(--white);
+    margin-bottom: 15px;
+    display: block; /* Ensure margin works */
+}
+.footer-col p {
+    font-size: 0.9rem;
+    margin-bottom: 0; /* Remove default margin if needed */
+}
+
+.footer-col h4 {
+    color: var(--white);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col ul a {
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s ease;
+}
+.footer-col ul a:hover {
+    color: var(--white);
+}
+
+.copyright {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+.copyright p {
+    margin: 0;
+}
+
+/* --- Responsive Design --- */
+
+/* Tablets and smaller desktops */
+@media (max-width: 992px) {
+    .nav-links {
+        display: none; /* Hide desktop links */
+        position: absolute;
+        top: 70px; /* Position below header */
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        flex-direction: column;
+        padding: 20px 0;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+        border-top: 1px solid var(--border-color); /* Add separator */
+    }
+
+    .nav-links.active {
+        display: flex; /* Show when active */
+    }
+
+    .nav-links li {
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .mobile-nav-toggle {
+        display: block; /* Show hamburger menu */
+    }
+
+    .nav-actions .search-bar {
+        min-width: 150px; /* Slightly smaller search bar */
+    }
+
+    .hero-content h1 {
+       font-size: 2.4rem;
+    }
+    .sub-headline {
+        font-size: 1.1rem;
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.6rem; }
+
+    .section-padding {
+        padding: 40px 0;
+    }
+
+    .hero-search {
+        flex-direction: column; /* Stack input and button */
+        align-items: stretch; /* Make items full width */
+    }
+    .hero-search input {
+        max-width: none; /* Remove max width */
+    }
+
+    .hero-ctas {
+        gap: 10px;
+    }
+    .cta-button.large {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+
+    .card-container {
+         grid-template-columns: 1fr; /* Stack cards */
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust footer columns */
+        gap: 20px;
+    }
+    .footer-col {
+        text-align: center; /* Center footer content on mobile */
+    }
+    .footer-col .logo {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+     .newsletter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* Smaller mobile devices */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .nav-actions {
+        gap: 10px;
+    }
+    /* Keep search bar for accessibility, but maybe make it smaller or icon-based */
+    .nav-actions .search-bar {
+        min-width: 120px;
+        padding: 6px 12px;
+    }
+
+    .nav-actions .cta-button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+/* --- Basic Scroll Animations (Optional) --- */
+/* Add this class using JS when elements enter viewport */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform; /* Optimize animation */
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
